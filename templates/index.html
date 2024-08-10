@@ -6,6 +6,18 @@
     <title>flask App</title>
 </head>
 <body>
-    Hello World
+   <h1>Hello World</h1>
+   <form method="POST" action="{{url_for('index')}}">
+    <input type="text" name="username" placeholder="Username"><br>
+    <input type="password" name="password" placeholder="Password"><br>
+    <input type="submit" value="Login">
+   </form>
+
+   <h1>File Upload</h1>
+   <form method="POST" action="{{url_for('file_upload')}}" enctype="multipart/form-data">
+    <input type="file" name="file"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/plain" required="required"><br>
+    <input type="submit" value="upload file">
+   </form>
+
 </body>
 </html>

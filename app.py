@@ -1,14 +1,39 @@
 from flask import Flask, request, make_response, render_template
-
+import pandas as pd
+ 
 app = Flask(__name__,template_folder='templates')
 
 
 
 
 
-@app.route("/")
-def message():
-    return render_template('index.html')
+@app.route("/", methods =['GET','POST'])
+def index():
+    if request.method=='GET':
+        return render_template('index.html')
+    elif request.method=='POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+
+        if username == 'neuraline' and password == 'password':
+            return "Success"
+        else:
+            return 'Failure'
+
+    
+@app.route("/file_upload", methods=['POST'])
+def file_upload():
+    file = request.files['file']
+
+    if file.content_type == 'text/plain':
+        return file.read().decode()
+    elif file.content_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' or file.content_type == 'application/vnd.ms-excel':
+        df = pd.read_excel(file)
+        return df.to_html()
+
+
+
 
 
 
