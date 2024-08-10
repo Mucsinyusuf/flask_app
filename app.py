@@ -1,6 +1,6 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, render_template
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='templates')
 
 
 
@@ -8,33 +8,45 @@ app = Flask(__name__)
 
 @app.route("/")
 def message():
-    return "<h1>Hello World</h1>"
-
-@app.route("/hello")
-def hello ():
-    response = make_response('Hello World\n')
-    response.status_code = 202
-    response.headers['content-type'] = 'application/octet-stream'
-    return response
+    return render_template('index.html')
 
 
-@app.route("/greet/<name>")
-def greet(name):
-    return f"hello {name}"
 
-@app.route("/add/<int:number1>/<int:number2>")
-def add(number1,number2):
-    return f"result is {number1+number2}"
 
-@app.route("/handle_url_params")
-def handle_params():
-    if 'greeting' in request.args.keys() and 'name' in request.args.keys():
 
-        greeting = request.args['greeting']
-        name = request.args.get('name')
-        return f"{greeting}, {name}"
-    else:
-        return "one params are missing"
+
+
+
+
+
+
+
+
+# @app.route("/hello")
+# def hello ():
+#     response = make_response('Hello World\n')
+#     response.status_code = 202
+#     response.headers['content-type'] = 'application/octet-stream'
+#     return response
+
+
+# @app.route("/greet/<name>")
+# def greet(name):
+#     return f"hello {name}"
+
+# @app.route("/add/<int:number1>/<int:number2>")
+# def add(number1,number2):
+#     return f"result is {number1+number2}"
+
+# @app.route("/handle_url_params")
+# def handle_params():
+#     if 'greeting' in request.args.keys() and 'name' in request.args.keys():
+
+#         greeting = request.args['greeting']
+#         name = request.args.get('name')
+#         return f"{greeting}, {name}"
+#     else:
+#         return "one params are missing"
    
 
 
